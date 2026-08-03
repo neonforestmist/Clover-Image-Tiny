@@ -1,0 +1,27 @@
+# Python environments and caches
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Hugging Face and generated model files
+.cache/
+model/
+models/
+*.safetensors
+*.bin
+*.ckpt
+*.pt
+*.pth
+*.mlpackage/
+*.mlmodelc/
+
+# Generated images and metadata
+outputs/
+clover-image-tiny*.png
+clover-image-tiny*.json
+
+# Local configuration
+.env
+.DS_Store
