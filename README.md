@@ -14,8 +14,8 @@
 </p>
 
 The runnable-code home for **Clover Image Tiny**, a compact Stable Diffusion
-1.4-class 512×512 text-to-image model for local Diffusers and on-device Core
-ML workflows.
+1.4-class 512×512 model family for local Diffusers and on-device Core ML
+generation and inpainting workflows.
 
 This GitHub repository intentionally contains **no model weights**. The Python
 examples download the approximately 1.67 GB checkpoint from
@@ -28,7 +28,7 @@ use and reuse the normal local Hugging Face cache afterward.
 |---|---|---|
 | Local web app | Visual prompting on macOS, Windows, or Linux | `python app.py` |
 | Command line | Scripts, reproducibility, and batch workflows | `python generate.py --prompt "…"` |
-| Live demo | Trying the model without local setup | [ZeroGPU Space](https://huggingface.co/spaces/neonforestmist/Clover-Image-Tiny-Demo) |
+| Live demo | Trying Regular generation or Inpainting without local setup | [ZeroGPU Space](https://huggingface.co/spaces/neonforestmist/Clover-Image-Tiny-Demo) |
 | Native iPhone app | Private on-device Core ML generation | [Clover Image Tiny iOS](https://github.com/neonforestmist/Clover-Image-Tiny-iOS) |
 | LoRA studio | Training styles and exporting Core ML state | [Visual LoRA trainer](https://github.com/neonforestmist/clover-image-tiny-lora-trainer) |
 
@@ -127,6 +127,47 @@ python generate.py \
 The validated reference recipe is 50-step PNDM, guidance 7.5, 512×512, and
 one image. More steps take longer and do not guarantee a better result.
 
+## Inpainting
+
+[`Clover-Image-Tiny-Inpaint`](https://huggingface.co/neonforestmist/Clover-Image-Tiny-Inpaint)
+is the separate 9-channel SD 1.4-class adaptation. Its U-Net receives noisy
+latents, a white-on-black mask, and masked-source latents. White pixels are
+regenerated and black pixels are preserved. The companion
+[`Core ML bundle`](https://huggingface.co/neonforestmist/Clover-Image-Tiny-Inpaint-CoreML)
+is an optional 1,670 MB download in the iOS app; it is not included in the app
+or downloaded with Regular Clover.
+
+```python
+from diffusers import AutoPipelineForInpainting, DPMSolverMultistepScheduler
+from diffusers.utils import load_image
+
+pipe = AutoPipelineForInpainting.from_pretrained(
+    "neonforestmist/Clover-Image-Tiny-Inpaint",
+    torch_dtype="auto",
+)
+pipe.scheduler = DPMSolverMultistepScheduler.from_config(pipe.scheduler.config)
+
+result = pipe(
+    prompt="a realistic orange cat sitting in the doorway, detailed photography",
+    image=load_image("source.png"),
+    mask_image=load_image("mask.png"),
+    padding_mask_crop=64,
+    num_inference_steps=20,
+    guidance_scale=7.5,
+).images[0]
+result.save("inpainted.png")
+```
+
+DPM-Solver++ with 20 steps is the recommended starting point; interactive
+inpainting is capped at 50 steps in Clover iOS and the hosted demo. Small masks
+use a context crop before 512×512 inference and are composited back through the
+exact mask. Existing Regular Clover LoRAs target a 4-channel U-Net and are not
+interchangeable with this 9-channel model.
+
+<p align="center">
+  <img src="https://huggingface.co/neonforestmist/Clover-Image-Tiny-Inpaint/resolve/main/examples/result-cat.png" alt="A cat inpainted into a masked greenhouse doorway" width="512">
+</p>
+
 ## Example outputs
 
 <p align="center">
@@ -148,6 +189,8 @@ Hugging Face and platform-specific source remains in focused GitHub projects.
 | [Clover Image Tiny on Hugging Face](https://huggingface.co/neonforestmist/Clover-Image-Tiny) | Model weights, model card, provenance, and exact checkpoint files |
 | [Clover Image Tiny Demo](https://huggingface.co/spaces/neonforestmist/Clover-Image-Tiny-Demo) | Hosted ZeroGPU generation with named styles |
 | [Clover Image Tiny iOS](https://github.com/neonforestmist/Clover-Image-Tiny-iOS) | SwiftUI/Core ML iPhone app and model downloader |
+| [Clover Image Tiny Inpaint](https://huggingface.co/neonforestmist/Clover-Image-Tiny-Inpaint) | 9-channel Diffusers inpainting checkpoint, examples, and citation |
+| [Clover Image Tiny Inpaint Core ML](https://huggingface.co/neonforestmist/Clover-Image-Tiny-Inpaint-CoreML) | Optional 1,670 MB compiled inpainting resources |
 | [Clover Image Tiny LoRA Trainer](https://github.com/neonforestmist/clover-image-tiny-lora-trainer) | Visual training studio and stateful Core ML exporter |
 | [Clover Image Tiny Core ML](https://huggingface.co/neonforestmist/Clover-Image-Tiny-CoreML) | Shared downloadable Core ML pipeline |
 

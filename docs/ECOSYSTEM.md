@@ -14,6 +14,12 @@ directory.
 | Native iPhone app | [GitHub · Clover-Image-Tiny-iOS](https://github.com/neonforestmist/Clover-Image-Tiny-iOS) |
 | LoRA trainer and Core ML GUI | [GitHub · clover-image-tiny-lora-trainer](https://github.com/neonforestmist/clover-image-tiny-lora-trainer) |
 | Shared Core ML pipeline | [Hugging Face · Clover-Image-Tiny-CoreML](https://huggingface.co/neonforestmist/Clover-Image-Tiny-CoreML) |
+| 9-channel inpainting checkpoint | [Hugging Face · Clover-Image-Tiny-Inpaint](https://huggingface.co/neonforestmist/Clover-Image-Tiny-Inpaint) |
+| Optional inpainting Core ML bundle | [Hugging Face · Clover-Image-Tiny-Inpaint-CoreML](https://huggingface.co/neonforestmist/Clover-Image-Tiny-Inpaint-CoreML) |
+
+The live Space contains both Regular and Inpainting modes. Inpainting uses a
+separate 9-channel U-Net and is also an optional 1,670 MB download in the native
+app. It does not dynamically load the Regular model's 4-channel LoRA files.
 
 ## Named styles
 
