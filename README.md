@@ -6,6 +6,7 @@
 
 <p align="center">
   <a href="https://huggingface.co/neonforestmist/Clover-Image-Tiny"><img alt="Hugging Face model" src="https://img.shields.io/badge/Hugging_Face-Model-FFD21E?logo=huggingface&logoColor=111"></a>
+  <a href="https://huggingface.co/neonforestmist/Clover-Image-Tiny-Inpaint"><img alt="Inpainting model" src="https://img.shields.io/badge/Inpainting-Model-FFB000?logo=huggingface&logoColor=111"></a>
   <a href="https://huggingface.co/spaces/neonforestmist/Clover-Image-Tiny-Demo"><img alt="Live demo" src="https://img.shields.io/badge/Live-ZeroGPU_Demo-16A34A?logo=huggingface&logoColor=white"></a>
   <a href="https://github.com/neonforestmist/Clover-Image-Tiny-iOS"><img alt="iPhone app" src="https://img.shields.io/badge/iPhone-Core_ML-111111?logo=apple&logoColor=white"></a>
   <a href="https://github.com/neonforestmist/clover-image-tiny-lora-trainer"><img alt="LoRA trainer" src="https://img.shields.io/badge/LoRA-Visual_Trainer-7C3AED?logo=python&logoColor=white"></a>
@@ -21,6 +22,12 @@ This GitHub repository intentionally contains **no model weights**. The Python
 examples download the approximately 1.67 GB checkpoint from
 [Hugging Face](https://huggingface.co/neonforestmist/Clover-Image-Tiny) on first
 use and reuse the normal local Hugging Face cache afterward.
+
+For masked image editing, use the dedicated
+[Clover Image Tiny Inpaint model](https://huggingface.co/neonforestmist/Clover-Image-Tiny-Inpaint)
+instead of the regular 4-channel checkpoint. Its optional
+[Core ML bundle](https://huggingface.co/neonforestmist/Clover-Image-Tiny-Inpaint-CoreML)
+is published separately.
 
 ## 1. Choose how to run it
 
