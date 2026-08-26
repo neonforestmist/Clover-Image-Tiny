@@ -175,6 +175,16 @@ interchangeable with this 9-channel model.
   <img src="https://huggingface.co/neonforestmist/Clover-Image-Tiny-Inpaint/resolve/main/examples/result-cat.png" alt="A cat inpainted into a masked greenhouse doorway" width="512">
 </p>
 
+### 6.1 Example: add blue sunglasses
+
+Prompt: `add blue sunglasses`
+
+<p align="center">
+  <a href="https://huggingface.co/neonforestmist/Clover-Image-Tiny-Inpaint"><img src="https://huggingface.co/neonforestmist/Clover-Image-Tiny-Inpaint/resolve/main/examples/sunglasses-source.png" alt="Cat source before adding sunglasses" width="360"></a>
+  <a href="https://huggingface.co/neonforestmist/Clover-Image-Tiny-Inpaint"><img src="https://huggingface.co/neonforestmist/Clover-Image-Tiny-Inpaint/resolve/main/examples/sunglasses-result.png" alt="Cat after adding blue sunglasses" width="360"></a>
+</p>
+<p align="center"><em>Source image</em> &nbsp;→&nbsp; <em>Inpainted result</em></p>
+
 ## 7. Example outputs
 
 <p align="center">
