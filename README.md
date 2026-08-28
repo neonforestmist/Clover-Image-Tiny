@@ -188,13 +188,13 @@ Prompt: `add blue sunglasses`
 ## 7. Example outputs
 
 <p align="center">
-  <img src="assets/examples.png" alt="Paired baseline and Clover Image Tiny examples" width="1000">
+  <img src="assets/examples.png" alt="Nine Clover Image Tiny prompt examples" width="1000">
 </p>
 
-Each row uses the same prompt and seed. The left column is the pinned
-BK-SDM-Tiny-2M starting model and the right column is Clover Image Tiny. See the
+Nine 512×512 generations from the model's Hugging Face prompt gallery. See the
 [Hugging Face model card](https://huggingface.co/neonforestmist/Clover-Image-Tiny)
-for the exact evaluation recipe, training lineage, and data provenance.
+for more examples, the exact evaluation recipe, training lineage, and data
+provenance.
 
 ## 8. Complete Clover ecosystem
 
