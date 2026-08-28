@@ -171,10 +171,6 @@ use a context crop before 512×512 inference and are composited back through the
 exact mask. Existing Regular Clover LoRAs target a 4-channel U-Net and are not
 interchangeable with this 9-channel model.
 
-<p align="center">
-  <img src="https://huggingface.co/neonforestmist/Clover-Image-Tiny-Inpaint/resolve/main/examples/result-cat.png" alt="A cat inpainted into a masked greenhouse doorway" width="512">
-</p>
-
 ### 6.1 Example: add blue sunglasses
 
 Prompt: `add blue sunglasses`
