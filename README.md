@@ -168,8 +168,14 @@ result.save("inpainted.png")
 DPM-Solver++ with 20 steps is the recommended starting point; interactive
 inpainting is capped at 50 steps in Clover iOS and the hosted demo. Small masks
 use a context crop before 512×512 inference and are composited back through the
-exact mask. Existing Regular Clover LoRAs target a 4-channel U-Net and are not
-interchangeable with this 9-channel model.
+exact mask. In Diffusers, the published Regular Clover LoRAs are mechanically
+compatible with this model because they modify attention projections only;
+those tensor shapes are unchanged in the 9-channel U-Net. They were trained for
+text-to-image, so masked-edit quality should still be evaluated per style.
+LoRAs that modify the 4-channel input convolution are not compatible. The
+shipping iOS inpainting path is stateless and does not load styles dynamically;
+use an adapter-aware stateful export or fuse a compatible LoRA before Core ML
+conversion.
 
 ### 6.1 Example: add blue sunglasses
 

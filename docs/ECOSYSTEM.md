@@ -19,7 +19,10 @@ directory.
 
 The live Space contains both Regular and Inpainting modes. Inpainting uses a
 separate 9-channel U-Net and is also an optional 1,670 MB download in the native
-app. It does not dynamically load the Regular model's 4-channel LoRA files.
+app. The published Regular LoRAs modify attention projections only, so they are
+mechanically compatible with the 9-channel Diffusers U-Net, although their
+masked-edit quality must be evaluated separately. The shipping iOS inpainting
+path is stateless and does not load those styles dynamically.
 
 ## Named styles
 
