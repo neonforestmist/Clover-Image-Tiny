@@ -3,8 +3,8 @@
 <p align="center"><img src="https://huggingface.co/neonforestmist/Clover-Image-Tiny/resolve/3f2a698bc3cbad617970a73d623e0732bb5f87f5/assets/clover-image-tiny-banner.png" alt="Clover Image Tiny original mosaic" width="1200"></p>
 
 <p align="center">
-  <strong>512 × 512 text-to-image generation with a 323.4M-parameter denoiser.</strong><br>
-  Based on BK-SDM-Tiny, with additional distillation. Diffusers, optional LoRA styles, and separate Core ML releases.
+  <strong>Compact, low-latency image generation for local apps and offline creative work.</strong><br>
+  512 × 512 output. A 323.4M-parameter denoiser, optional LoRA styles, and Python and Core ML workflows.
 </p>
 
 <p align="center">
@@ -25,7 +25,7 @@
 <a href="https://github.com/neonforestmist/Clover-Image-Tiny/blob/main/LICENSE"><img src="assets/links/license.svg" alt="CODE LICENSE" height="36"></a>
 </p>
 
-<p align="center"><a href="#choose-your-model">Models</a> · <a href="#examples">Examples</a> · <a href="#styles">Styles</a> · <a href="https://github.com/neonforestmist/Clover-Image-Tiny#run-clover-locally">Run it</a> · <a href="https://huggingface.co/neonforestmist/Clover-Image-Tiny/blob/main/docs/MODEL_DETAILS.md">Evaluation &amp; documentation</a></p>
+<p align="center"><a href="#choose-your-model">Models</a> · <a href="#examples">Examples</a> · <a href="#styles">Styles</a> · <a href="https://github.com/neonforestmist/Clover-Image-Tiny#run-clover-locally">Run it</a> · <a href="#evaluation">Evaluation</a> · <a href="https://huggingface.co/neonforestmist/Clover-Image-Tiny/blob/main/docs/MODEL_DETAILS.md">Documentation</a></p>
 
 ---
 
@@ -153,9 +153,25 @@ after setup; model downloads require a network connection.
 | **512 × 512 native output** | Native output resolution |
 | **Diffusers + separate Core ML exports** | Python integration and a path to on-device Apple apps |
 
-On one NVIDIA A10G benchmark, Clover averaged **1.024 seconds per image** across
-16 prompts at 512 × 512, 30 DDIM steps, and guidance 7.5. That is a specific measured
-GPU result, not an iPhone timing or a speed guarantee. [See the comparison and protocol](https://huggingface.co/neonforestmist/Clover-Image-Tiny/blob/main/benchmarks/text-to-image/results/clover-small-model-comparison-20260825/REPORT.md).
+## Evaluation
+
+**Compact denoiser, roughly one-second generation.** Clover averaged **1.024 seconds per image**
+on an NVIDIA A10G across 16 prompts at 512 × 512, 30 DDIM steps, and guidance 7.5.
+
+| Model | U-Net parameters ↓ | Loaded pipeline parameters ↓ | Mean latency ↓ | Peak CUDA memory ↓ | Mean CLIP cosine ↑ |
+|---|---:|---:|---:|---:|---:|
+| [Clover Image Tiny](https://huggingface.co/neonforestmist/Clover-Image-Tiny) | **323.4M** | 834.1M | 1.024 s | 2,233 MB | 0.3195 |
+| [BK-SDM-Tiny-2M](https://huggingface.co/nota-ai/bk-sdm-tiny-2m) | **323.4M** | 834.1M | 1.027 s | 2,230 MB | 0.3246 |
+| [Segmind Tiny-SD](https://huggingface.co/segmind/tiny-sd) | **323.4M** | **530.1M** | 1.028 s | **1,649 MB** | **0.3345** |
+| [BK-SDM-v2-Tiny](https://huggingface.co/nota-ai/bk-sdm-v2-tiny) | 326.8M | 750.9M | **0.957 s** | 2,067 MB | 0.3303 |
+
+**↓ Lower is better for size, latency, and memory; ↑ higher is better for CLIP prompt alignment. Bold marks the best result in each column, including ties.** Parameter counts describe footprint, not image quality.
+
+Clover's measured strengths are its **joint-smallest denoiser (323.4M parameters)** and **roughly one-second generation (1.024 s/image)** in this test. Its latency is within 0.4% of BK-SDM-Tiny-2M and Segmind Tiny-SD; that small gap is not an established speed advantage. BK-SDM-v2-Tiny is faster here, while Segmind Tiny-SD uses less memory and has the highest CLIP score.
+
+These are GPU measurements, not timings for older devices or iPhones. CLIP is a
+prompt-alignment proxy, not an overall image-quality rating.
+[Full protocol, outputs, and machine-readable results](https://huggingface.co/neonforestmist/Clover-Image-Tiny/blob/main/benchmarks/text-to-image/results/clover-small-model-comparison-20260825/REPORT.md).
 
 ## Usage notes
 
