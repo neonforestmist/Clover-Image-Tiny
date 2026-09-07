@@ -25,11 +25,11 @@
 <a href="https://github.com/neonforestmist/Clover-Image-Tiny/blob/main/LICENSE"><img src="assets/links/license.svg" alt="CODE LICENSE" height="36"></a>
 </p>
 
-<p align="center"><a href="#choose-your-model">Models</a> · <a href="#examples">Examples</a> · <a href="#styles">Styles</a> · <a href="https://github.com/neonforestmist/Clover-Image-Tiny#run-clover-locally">Run it</a> · <a href="#evaluation">Evaluation</a> · <a href="https://huggingface.co/neonforestmist/Clover-Image-Tiny/blob/main/docs/MODEL_DETAILS.md">Documentation</a></p>
+<p align="center"><a href="#models">Models</a> · <a href="#examples">Examples</a> · <a href="#styles">Styles</a> · <a href="https://github.com/neonforestmist/Clover-Image-Tiny#run-clover-locally">Run it</a> · <a href="#evaluation">Evaluation</a> · <a href="https://huggingface.co/neonforestmist/Clover-Image-Tiny/blob/main/docs/MODEL_DETAILS.md">Documentation</a></p>
 
 ---
 
-## Choose your model
+## Models
 
 Use the regular model to generate an image from text. Use Inpaint HQ to edit a masked
 region of an existing image. Both run locally after the model and dependencies are downloaded.
@@ -38,11 +38,11 @@ region of an existing image. Both run locally after the model and dependencies a
 |:---:|:---:|
 | ![Regular Clover output: a bouquet of blue flowers](https://huggingface.co/neonforestmist/Clover-Image-Tiny/resolve/3f2a698bc3cbad617970a73d623e0732bb5f87f5/examples/prompt-gallery/original/image_79.png) | ![Published Clover inpainting example: blue sunglasses added to a cat](https://huggingface.co/neonforestmist/Clover-Image-Tiny-Inpaint/resolve/3e22009fb6e61944f28b0389f775fc47e2c48724/examples/sunglasses-result.png) |
 | **Text → image.** Compact BK-SDM-Tiny architecture with a 323.4M-parameter U-Net and an additional Clover distillation pass. | **Image + mask + text → edit.** Full SD 1.5 inpainting U-Net with Clover's shared components. Larger than the regular model. |
-| [Model and weights](https://huggingface.co/neonforestmist/Clover-Image-Tiny) | [Model and weights](https://huggingface.co/neonforestmist/Clover-Image-Tiny-Inpaint) |
 
 The regular Diffusers package is about **1.67 GB**, including its text encoder, VAE,
 and safety checker. The 323.4M count describes the denoiser, not the complete pipeline.
 Inpainting uses a separate checkpoint; neither download includes the Python environment.
+The hosted demo runs remotely; local Python and Core ML workflows run on your hardware after setup.
 
 ## Examples
 
@@ -62,8 +62,6 @@ This published before-and-after example uses the prompt **“add blue sunglasses
 |:---:|:---:|
 | ![Original cat artwork before the masked sunglasses edit](https://huggingface.co/neonforestmist/Clover-Image-Tiny-Inpaint/resolve/3e22009fb6e61944f28b0389f775fc47e2c48724/examples/sunglasses-source.png) | ![Clover inpainting example: the cat with blue sunglasses added](https://huggingface.co/neonforestmist/Clover-Image-Tiny-Inpaint/resolve/3e22009fb6e61944f28b0389f775fc47e2c48724/examples/sunglasses-result.png) |
 
-[**Explore Clover Inpaint HQ →**](https://huggingface.co/neonforestmist/Clover-Image-Tiny-Inpaint) · [**Try generation and inpainting →**](https://huggingface.co/spaces/neonforestmist/Clover-Image-Tiny-Demo)
-
 Inpaint HQ pairs the full Stable Diffusion 1.5 inpainting denoiser with Clover's shared
 components. It is a larger, separate model focused on editing quality. For exact preservation,
 composite the result through the original binary mask.
@@ -76,7 +74,7 @@ prompt with the base model, Monet, Pointillism, and Watercolor Anime.
 | Clover | Monet | Pointillism | Watercolor Anime |
 |:---:|:---:|:---:|:---:|
 | ![Base Clover greenhouse example](https://huggingface.co/neonforestmist/Clover-Image-Tiny/resolve/3f2a698bc3cbad617970a73d623e0732bb5f87f5/examples/normal-to-lora/normal.png) | ![Monet style greenhouse with painterly brushwork](https://huggingface.co/neonforestmist/Clover-Image-Tiny/resolve/3f2a698bc3cbad617970a73d623e0732bb5f87f5/examples/normal-to-lora/monet.png) | ![Pointillism style greenhouse made from colored dots](https://huggingface.co/neonforestmist/Clover-Image-Tiny/resolve/3f2a698bc3cbad617970a73d623e0732bb5f87f5/examples/normal-to-lora/pointillism.png) | ![Watercolor Anime style greenhouse illustration](https://huggingface.co/neonforestmist/Clover-Image-Tiny/resolve/3f2a698bc3cbad617970a73d623e0732bb5f87f5/examples/normal-to-lora/watercolor_anime.png) |
-| [Base model](https://huggingface.co/neonforestmist/Clover-Image-Tiny) | [Get Monet](https://huggingface.co/neonforestmist/clover-image-tiny-monet-lora) | [Get Pointillism](https://huggingface.co/neonforestmist/clover-image-tiny-pointillism-lora) | [Get Watercolor Anime](https://huggingface.co/neonforestmist/clover-image-tiny-watercolor-anime-lora) |
+| Base model | [Get Monet](https://huggingface.co/neonforestmist/clover-image-tiny-monet-lora) | [Get Pointillism](https://huggingface.co/neonforestmist/clover-image-tiny-pointillism-lora) | [Get Watercolor Anime](https://huggingface.co/neonforestmist/clover-image-tiny-watercolor-anime-lora) |
 
 ## Run Clover locally
 
@@ -92,8 +90,8 @@ python app.py --device auto
 ```
 
 Open **http://127.0.0.1:7860** and enter a prompt. The local web app supports regular
-generation and optional styles. For masked editing, use the [hosted demo](https://huggingface.co/spaces/neonforestmist/Clover-Image-Tiny-Demo),
-[native app](https://github.com/neonforestmist/Clover-Image-Tiny-iOS), or [Inpaint HQ Python example](https://huggingface.co/neonforestmist/Clover-Image-Tiny-Inpaint#run-an-edit-with-python).
+generation and optional styles. For masked editing, use the hosted demo or native app
+linked above, or the [Inpaint HQ Python example](https://huggingface.co/neonforestmist/Clover-Image-Tiny-Inpaint#run-an-edit-with-python).
 
 The first generation downloads about **1.67 GB** of model files. Later runs reuse the
 Hugging Face cache. Allow extra room for the Python environment and caches. Use
@@ -131,19 +129,6 @@ Existing planned outputs are never overwritten.
 
 [**Full setup, controls, and offline instructions →**](docs/USAGE.md)
 
-## Interfaces
-
-| Your workflow | Start here |
-|---|---|
-| Try it in your browser | [Hosted demo: generation and inpainting](https://huggingface.co/spaces/neonforestmist/Clover-Image-Tiny-Demo) |
-| Generate locally with a visual interface | [GitHub setup and Gradio app](https://github.com/neonforestmist/Clover-Image-Tiny#run-clover-locally) |
-| Build with Python and Diffusers | [Model weights](https://huggingface.co/neonforestmist/Clover-Image-Tiny) · [Local runner](https://github.com/neonforestmist/Clover-Image-Tiny/blob/main/generate.py) |
-| Create on iPhone or iPad | [Native Clover app](https://github.com/neonforestmist/Clover-Image-Tiny-iOS) · [Core ML resources](https://huggingface.co/neonforestmist/Clover-Image-Tiny-CoreML) |
-| Train a personal style | [Visual LoRA trainer](https://github.com/neonforestmist/clover-image-tiny-lora-trainer) |
-
-The hosted demo runs remotely. Local Python and Core ML workflows run on your hardware
-after setup; model downloads require a network connection.
-
 ## Model facts
 
 | Regular Clover model | What it means |
@@ -160,7 +145,7 @@ on an NVIDIA A10G across 16 prompts at 512 × 512, 30 DDIM steps, and guidance 7
 
 | Model | U-Net parameters ↓ | Loaded pipeline parameters ↓ | Mean latency ↓ | Peak CUDA memory ↓ | Mean CLIP cosine ↑ |
 |---|---:|---:|---:|---:|---:|
-| [Clover Image Tiny](https://huggingface.co/neonforestmist/Clover-Image-Tiny) | **323.4M** | 834.1M | 1.024 s | 2,233 MB | 0.3195 |
+| Clover Image Tiny | **323.4M** | 834.1M | 1.024 s | 2,233 MB | 0.3195 |
 | [BK-SDM-Tiny-2M](https://huggingface.co/nota-ai/bk-sdm-tiny-2m) | **323.4M** | 834.1M | 1.027 s | 2,230 MB | 0.3246 |
 | [Segmind Tiny-SD](https://huggingface.co/segmind/tiny-sd) | **323.4M** | **530.1M** | 1.028 s | **1,649 MB** | **0.3345** |
 | [BK-SDM-v2-Tiny](https://huggingface.co/nota-ai/bk-sdm-v2-tiny) | 326.8M | 750.9M | **0.957 s** | 2,067 MB | 0.3303 |
@@ -188,11 +173,7 @@ creates images from text. Inpaint HQ takes an image, a mask, and a prompt, and u
 can be unreliable. Examples are selected outputs; results vary with prompts and settings.
 The packaged safety checker in the Python runner and hosted demo is imperfect.
 
-## Explore the project
-
-[Model weights and card](https://huggingface.co/neonforestmist/Clover-Image-Tiny) · [Inpaint HQ](https://huggingface.co/neonforestmist/Clover-Image-Tiny-Inpaint) ·
-[Core ML downloads](https://huggingface.co/neonforestmist/Clover-Image-Tiny-CoreML) · [Complete ecosystem](docs/ECOSYSTEM.md) ·
-[Training and benchmark details](https://huggingface.co/neonforestmist/Clover-Image-Tiny/blob/main/docs/MODEL_DETAILS.md)
+## About this repository
 
 This repository contains the local Gradio app, Diffusers command-line runner, pinned
 dependencies, and documentation. Model weights download from Hugging Face.
@@ -205,23 +186,10 @@ The code license does not replace the terms for downloaded weights.
 
 <p align="center"><img src="assets/examples.png" alt="Nine original Clover Image Tiny prompt examples" width="1000"></p>
 
-## Clover ecosystem
+## Related projects
 
-This repository is the central directory, while large artifacts remain on
-Hugging Face and platform-specific source remains in focused GitHub projects.
-
-| Project | Purpose |
-|---|---|
-| [Clover Image Tiny on Hugging Face](https://huggingface.co/neonforestmist/Clover-Image-Tiny) | Model weights, model card, provenance, and exact checkpoint files |
-| [Clover Image Tiny Demo](https://huggingface.co/spaces/neonforestmist/Clover-Image-Tiny-Demo) | Hosted ZeroGPU generation with named styles |
-| [Clover Image Tiny iOS](https://github.com/neonforestmist/Clover-Image-Tiny-iOS) | SwiftUI/Core ML iPhone app and model downloader |
-| [Clover Image Tiny Inpaint](https://huggingface.co/neonforestmist/Clover-Image-Tiny-Inpaint) | 9-channel Diffusers inpainting checkpoint, examples, and citation |
-| [Clover Image Tiny Inpaint Core ML](https://huggingface.co/neonforestmist/Clover-Image-Tiny-Inpaint-CoreML) | Separate compiled inpainting resources |
-| [Clover Image Tiny LoRA Trainer](https://github.com/neonforestmist/clover-image-tiny-lora-trainer) | Visual training studio and stateful Core ML exporter |
-| [Clover Image Tiny Core ML](https://huggingface.co/neonforestmist/Clover-Image-Tiny-CoreML) | Shared downloadable Core ML pipeline |
-
-The full style and dataset directory is in [`docs/ECOSYSTEM.md`](docs/ECOSYSTEM.md).
-
+The [ecosystem directory](docs/ECOSYSTEM.md) lists the apps, model downloads,
+Core ML bundles, style adapters, and training datasets in one place.
 
 ## Detailed documentation
 
