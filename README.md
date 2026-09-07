@@ -7,19 +7,20 @@
   512 × 512 output · 323.4M-parameter denoiser · LoRA styles · Diffusers and separate Core ML releases.
 </p>
 
-<p align="center">
-<a href="https://huggingface.co/neonforestmist/Clover-Image-Tiny"><img src="assets/links/model.svg" alt="HF MODEL" height="36"></a>
-<a href="https://huggingface.co/neonforestmist/Clover-Image-Tiny-Inpaint"><img src="assets/links/inpaint.svg" alt="INPAINTING" height="36"></a>
-<a href="https://huggingface.co/spaces/neonforestmist/Clover-Image-Tiny-Demo"><img src="assets/links/live-demo.svg" alt="LIVE DEMO" height="36"></a>
-<a href="https://github.com/neonforestmist/Clover-Image-Tiny-iOS"><img src="assets/links/ios-app.svg" alt="IPHONE / CORE ML" height="36"></a>
-</p>
-
-<p align="center">
-<a href="https://github.com/neonforestmist/clover-image-tiny-lora-trainer"><img src="assets/links/trainer.svg" alt="LORA TRAINER" height="36"></a>
-<a href="https://github.com/neonforestmist/Clover-Image-Tiny"><img src="assets/links/source.svg" alt="GITHUB SOURCE" height="36"></a>
-<a href="https://github.com/neonforestmist/Clover-Image-Tiny/actions/workflows/quality.yml"><img src="assets/links/checks.svg" alt="QUALITY CHECKS" height="36"></a>
-<a href="https://github.com/neonforestmist/Clover-Image-Tiny/blob/main/LICENSE"><img src="assets/links/license.svg" alt="CODE LICENSE" height="36"></a>
-</p>
+<table align="center" width="100%">
+<tr>
+<td align="center" width="25%"><a href="https://huggingface.co/neonforestmist/Clover-Image-Tiny"><img src="assets/links/model.svg" alt="HF MODEL" width="100%"></a></td>
+<td align="center" width="25%"><a href="https://huggingface.co/neonforestmist/Clover-Image-Tiny-Inpaint"><img src="assets/links/inpaint.svg" alt="INPAINTING" width="100%"></a></td>
+<td align="center" width="25%"><a href="https://huggingface.co/spaces/neonforestmist/Clover-Image-Tiny-Demo"><img src="assets/links/live-demo.svg" alt="LIVE DEMO" width="100%"></a></td>
+<td align="center" width="25%"><a href="https://github.com/neonforestmist/Clover-Image-Tiny-iOS"><img src="assets/links/ios-app.svg" alt="IPHONE / CORE ML" width="100%"></a></td>
+</tr>
+<tr>
+<td align="center" width="25%"><a href="https://github.com/neonforestmist/clover-image-tiny-lora-trainer"><img src="assets/links/trainer.svg" alt="LORA TRAINER" width="100%"></a></td>
+<td align="center" width="25%"><a href="https://github.com/neonforestmist/Clover-Image-Tiny"><img src="assets/links/source.svg" alt="GITHUB SOURCE" width="100%"></a></td>
+<td align="center" width="25%"><a href="https://github.com/neonforestmist/Clover-Image-Tiny/actions/workflows/quality.yml"><img src="assets/links/checks.svg" alt="QUALITY CHECKS" width="100%"></a></td>
+<td align="center" width="25%"><a href="https://github.com/neonforestmist/Clover-Image-Tiny/blob/main/LICENSE"><img src="assets/links/license.svg" alt="CODE LICENSE" width="100%"></a></td>
+</tr>
+</table>
 
 <p align="center"><a href="#models">Models</a> · <a href="#examples">Examples</a> · <a href="#styles">Styles</a> · <a href="https://github.com/neonforestmist/Clover-Image-Tiny#run-clover-locally">Run it</a> · <a href="#evaluation">Evaluation</a> · <a href="https://huggingface.co/neonforestmist/Clover-Image-Tiny/blob/main/docs/MODEL_DETAILS.md">Documentation</a></p>
 
