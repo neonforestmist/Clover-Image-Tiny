@@ -3,23 +3,19 @@
 <p align="center"><img src="https://huggingface.co/neonforestmist/Clover-Image-Tiny/resolve/3f2a698bc3cbad617970a73d623e0732bb5f87f5/assets/clover-image-tiny-banner.png" alt="Clover Image Tiny original mosaic" width="1200"></p>
 
 <p align="center">
-  <strong>Compact, low-latency image generation for local apps and offline creative work.</strong><br>
-  512 × 512 output. A 323.4M-parameter denoiser, optional LoRA styles, and Python and Core ML workflows.
+  <strong>SD 1.4-class image generation in a compact model for local apps and offline use.</strong><br>
+  512 × 512 output · 323.4M-parameter denoiser · LoRA styles · Diffusers and separate Core ML releases.
 </p>
 
 <p align="center">
 <a href="https://huggingface.co/neonforestmist/Clover-Image-Tiny"><img src="assets/links/model.svg" alt="HF MODEL" height="36"></a>
 <a href="https://huggingface.co/neonforestmist/Clover-Image-Tiny-Inpaint"><img src="assets/links/inpaint.svg" alt="INPAINTING" height="36"></a>
 <a href="https://huggingface.co/spaces/neonforestmist/Clover-Image-Tiny-Demo"><img src="assets/links/live-demo.svg" alt="LIVE DEMO" height="36"></a>
-</p>
-
-<p align="center">
-<a href="https://huggingface.co/spaces/neonforestmist/Clover-Image-Tiny-Demo"><img src="assets/links/zero-gpu.svg" alt="ZEROGPU DEMO" height="36"></a>
 <a href="https://github.com/neonforestmist/Clover-Image-Tiny-iOS"><img src="assets/links/ios-app.svg" alt="IPHONE / CORE ML" height="36"></a>
-<a href="https://github.com/neonforestmist/clover-image-tiny-lora-trainer"><img src="assets/links/trainer.svg" alt="LORA TRAINER" height="36"></a>
 </p>
 
 <p align="center">
+<a href="https://github.com/neonforestmist/clover-image-tiny-lora-trainer"><img src="assets/links/trainer.svg" alt="LORA TRAINER" height="36"></a>
 <a href="https://github.com/neonforestmist/Clover-Image-Tiny"><img src="assets/links/source.svg" alt="GITHUB SOURCE" height="36"></a>
 <a href="https://github.com/neonforestmist/Clover-Image-Tiny/actions/workflows/quality.yml"><img src="assets/links/checks.svg" alt="QUALITY CHECKS" height="36"></a>
 <a href="https://github.com/neonforestmist/Clover-Image-Tiny/blob/main/LICENSE"><img src="assets/links/license.svg" alt="CODE LICENSE" height="36"></a>
@@ -37,7 +33,7 @@ region of an existing image. Both run locally after the model and dependencies a
 | Clover Image Tiny | Clover Inpaint HQ |
 |:---:|:---:|
 | ![Regular Clover output: a bouquet of blue flowers](https://huggingface.co/neonforestmist/Clover-Image-Tiny/resolve/3f2a698bc3cbad617970a73d623e0732bb5f87f5/examples/prompt-gallery/original/image_79.png) | ![Published Clover inpainting example: blue sunglasses added to a cat](https://huggingface.co/neonforestmist/Clover-Image-Tiny-Inpaint/resolve/3e22009fb6e61944f28b0389f775fc47e2c48724/examples/sunglasses-result.png) |
-| **Text → image.** Compact BK-SDM-Tiny architecture with a 323.4M-parameter U-Net and an additional Clover distillation pass. | **Image + mask + text → edit.** Full SD 1.5 inpainting U-Net with Clover's shared components. Larger than the regular model. |
+| **Text → image.** Compact SD 1.4-class generation with a 323.4M-parameter denoiser. | **Image + mask + text → edit.** SD 1.5-class inpainting with Clover's shared components. A larger, separate checkpoint. |
 
 The regular Diffusers package is about **1.67 GB**, including its text encoder, VAE,
 and safety checker. The 323.4M count describes the denoiser, not the complete pipeline.
@@ -62,9 +58,9 @@ This published before-and-after example uses the prompt **“add blue sunglasses
 |:---:|:---:|
 | ![Original cat artwork before the masked sunglasses edit](https://huggingface.co/neonforestmist/Clover-Image-Tiny-Inpaint/resolve/3e22009fb6e61944f28b0389f775fc47e2c48724/examples/sunglasses-source.png) | ![Clover inpainting example: the cat with blue sunglasses added](https://huggingface.co/neonforestmist/Clover-Image-Tiny-Inpaint/resolve/3e22009fb6e61944f28b0389f775fc47e2c48724/examples/sunglasses-result.png) |
 
-Inpaint HQ pairs the full Stable Diffusion 1.5 inpainting denoiser with Clover's shared
-components. It is a larger, separate model focused on editing quality. For exact preservation,
-composite the result through the original binary mask.
+Inpaint HQ provides SD 1.5-class masked editing. For exact preservation outside the
+edited region, composite the result through the original binary mask. Its full-size
+inpainting denoiser and shared components are documented in the inpainting model card.
 
 ## Styles
 
@@ -140,8 +136,28 @@ Existing planned outputs are never overwritten.
 
 ## Evaluation
 
-**Compact denoiser, roughly one-second generation.** Clover averaged **1.024 seconds per image**
-on an NVIDIA A10G across 16 prompts at 512 × 512, 30 DDIM steps, and guidance 7.5.
+### Compact model, practical generation speed
+
+Clover combines a **323.4M-parameter denoiser** with **1.024-second mean generation**
+in the published NVIDIA A10G test. It retains the compact architecture while adding
+Clover's distillation pass, style adapters, and separate Core ML deployment options.
+
+| Measured on NVIDIA A10G | Clover Image Tiny |
+|---|---:|
+| Mean generation time ↓ | **1.024 s/image** |
+| Peak CUDA memory ↓ | **2,233 MB** |
+| Denoiser parameters ↓ | **323.4M** |
+
+**Test settings:** 16 prompts, 512 × 512, 30 DDIM steps, guidance 7.5, after warm-up.
+Lower values mean less time, memory, or denoiser storage—not automatically better images.
+These are GPU results, not older-device or iPhone timings.
+
+Clover runs in the same approximate one-second range as BK-SDM-Tiny-2M and Segmind
+Tiny-SD in this test. Other references lead individual latency, memory, and CLIP
+metrics; the comparison does not establish an overall quality or speed lead.
+
+<details>
+<summary>Full four-model comparison: latency, memory, and prompt alignment</summary>
 
 | Model | U-Net parameters ↓ | Loaded pipeline parameters ↓ | Mean latency ↓ | Peak CUDA memory ↓ | Mean CLIP cosine ↑ |
 |---|---:|---:|---:|---:|---:|
@@ -152,11 +168,13 @@ on an NVIDIA A10G across 16 prompts at 512 × 512, 30 DDIM steps, and guidance 7
 
 **↓ Lower is better for size, latency, and memory; ↑ higher is better for CLIP prompt alignment. Bold marks the best result in each column, including ties.** Parameter counts describe footprint, not image quality.
 
-Clover's measured strengths are its **joint-smallest denoiser (323.4M parameters)** and **roughly one-second generation (1.024 s/image)** in this test. Its latency is within 0.4% of BK-SDM-Tiny-2M and Segmind Tiny-SD; that small gap is not an established speed advantage. BK-SDM-v2-Tiny is faster here, while Segmind Tiny-SD uses less memory and has the highest CLIP score.
+CLIP cosine measures prompt alignment, not overall visual quality. The latency gaps
+between Clover, BK-SDM-Tiny-2M, and Segmind Tiny-SD are below 0.4% and should be read
+as near parity, not an established speed advantage.
 
-These are GPU measurements, not timings for older devices or iPhones. CLIP is a
-prompt-alignment proxy, not an overall image-quality rating.
-[Full protocol, outputs, and machine-readable results](https://huggingface.co/neonforestmist/Clover-Image-Tiny/blob/main/benchmarks/text-to-image/results/clover-small-model-comparison-20260825/REPORT.md).
+</details>
+
+[Benchmark protocol, all outputs, and raw results](https://huggingface.co/neonforestmist/Clover-Image-Tiny/blob/main/benchmarks/text-to-image/results/clover-small-model-comparison-20260825/REPORT.md).
 
 ## Usage notes
 
