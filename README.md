@@ -1,6 +1,6 @@
 <h1 align="center">Clover Image Tiny</h1>
 
-<p align="center"><img src="assets/banner.png" alt="Clover Image Tiny original banner" width="1200"></p>
+<p align="center"><img src="https://huggingface.co/neonforestmist/Clover-Image-Tiny/resolve/3f2a698bc3cbad617970a73d623e0732bb5f87f5/assets/clover-image-tiny-banner.png" alt="Clover Image Tiny original mosaic" width="1200"></p>
 
 <p align="center">
   <strong>512 × 512 text-to-image generation with a 323.4M-parameter denoiser.</strong><br>
