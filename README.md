@@ -1,35 +1,60 @@
-# 🍀 Clover Image Tiny
-
-### Small model. Room for big ideas.
-
-**Turn a few words into an image. Explore a different style. Make a focused edit.**
-Clover Image Tiny is a compact, open-weight AI image generator for local text-to-image
-workflows on Mac, Windows, and Linux, with Core ML releases for Apple devices.
-Download the model once, then create offline on your own hardware.
+<h1 align="center">Clover Image Tiny</h1>
 
 <p align="center">
-  <a href="https://huggingface.co/spaces/neonforestmist/Clover-Image-Tiny-Demo"><img alt="Try the demo" src="assets/links/try-demo.svg" height="40"></a>
-  <a href="https://huggingface.co/neonforestmist/Clover-Image-Tiny"><img alt="Get the model" src="assets/links/get-model.svg" height="40"></a>
-  <a href="https://huggingface.co/neonforestmist/Clover-Image-Tiny-Inpaint"><img alt="Inpainting" src="assets/links/inpainting.svg" height="40"></a>
-  <a href="https://github.com/neonforestmist/Clover-Image-Tiny"><img alt="GitHub source" src="assets/links/github-source.svg" height="40"></a>
+  <strong>512 × 512 text-to-image generation with a 323.4M-parameter denoiser.</strong><br>
+  Based on BK-SDM-Tiny, with additional distillation. Diffusers, optional LoRA styles, and separate Core ML releases.
 </p>
 
-## Create from a prompt
+<table align="center">
+<tr>
+<td align="center"><a href="https://huggingface.co/neonforestmist/Clover-Image-Tiny"><img src="assets/links/model.svg" alt="HF MODEL" height="36"></a></td>
+<td align="center"><a href="https://huggingface.co/neonforestmist/Clover-Image-Tiny-Inpaint"><img src="assets/links/inpaint.svg" alt="INPAINTING" height="36"></a></td>
+<td align="center"><a href="https://huggingface.co/spaces/neonforestmist/Clover-Image-Tiny-Demo"><img src="assets/links/live-demo.svg" alt="LIVE DEMO" height="36"></a></td>
+</tr>
+<tr>
+<td align="center"><a href="https://huggingface.co/spaces/neonforestmist/Clover-Image-Tiny-Demo"><img src="assets/links/zero-gpu.svg" alt="ZEROGPU DEMO" height="36"></a></td>
+<td align="center"><a href="https://github.com/neonforestmist/Clover-Image-Tiny-iOS"><img src="assets/links/ios-app.svg" alt="IPHONE / CORE ML" height="36"></a></td>
+<td align="center"><a href="https://github.com/neonforestmist/clover-image-tiny-lora-trainer"><img src="assets/links/trainer.svg" alt="LORA TRAINER" height="36"></a></td>
+</tr>
+<tr>
+<td align="center"><a href="https://github.com/neonforestmist/Clover-Image-Tiny"><img src="assets/links/source.svg" alt="GITHUB SOURCE" height="36"></a></td>
+<td align="center"><a href="https://github.com/neonforestmist/Clover-Image-Tiny/actions/workflows/quality.yml"><img src="assets/links/checks.svg" alt="QUALITY CHECKS" height="36"></a></td>
+<td align="center"><a href="https://github.com/neonforestmist/Clover-Image-Tiny/blob/main/LICENSE"><img src="assets/links/license.svg" alt="CODE LICENSE" height="36"></a></td>
+</tr>
+</table>
 
-Describe the scene you want to explore. The regular Clover model can turn simple prompts
-into landscapes, still lifes, and stylized artwork. These are existing model examples,
-with the original prompts shown below.
+<p align="center"><a href="#choose-your-model">Models</a> · <a href="#examples">Examples</a> · <a href="#styles">Styles</a> · <a href="https://github.com/neonforestmist/Clover-Image-Tiny#run-clover-locally">Run it</a> · <a href="https://huggingface.co/neonforestmist/Clover-Image-Tiny/blob/main/docs/MODEL_DETAILS.md">Evaluation &amp; documentation</a></p>
+
+---
+
+## Choose your model
+
+Use the regular model to generate an image from text. Use Inpaint HQ to edit a masked
+region of an existing image. Both run locally after the model and dependencies are downloaded.
+
+| Clover Image Tiny | Clover Inpaint HQ |
+|:---:|:---:|
+| ![Regular Clover output: a bouquet of blue flowers](https://huggingface.co/neonforestmist/Clover-Image-Tiny/resolve/3f2a698bc3cbad617970a73d623e0732bb5f87f5/examples/prompt-gallery/original/image_79.png) | ![Published Clover inpainting example: blue sunglasses added to a cat](https://huggingface.co/neonforestmist/Clover-Image-Tiny-Inpaint/resolve/3e22009fb6e61944f28b0389f775fc47e2c48724/examples/sunglasses-result.png) |
+| **Text → image.** Compact BK-SDM-Tiny architecture with a 323.4M-parameter U-Net and an additional Clover distillation pass. | **Image + mask + text → edit.** Full SD 1.5 inpainting U-Net with Clover's shared components. Larger than the regular model. |
+| [Model and weights](https://huggingface.co/neonforestmist/Clover-Image-Tiny) | [Model and weights](https://huggingface.co/neonforestmist/Clover-Image-Tiny-Inpaint) |
+
+The regular Diffusers package is about **1.67 GB**, including its text encoder, VAE,
+and safety checker. The 323.4M count describes the denoiser, not the complete pipeline.
+Inpainting uses a separate checkpoint; neither download includes the Python environment.
+
+## Examples
+
+Selected outputs from the regular model, with their original prompts.
 
 | Moonlit greenhouse | Blue flowers | Stained-glass night |
 |:---:|:---:|:---:|
 | ![Clover text-to-image output: a tiny greenhouse in a moonlit garden](https://huggingface.co/neonforestmist/Clover-Image-Tiny/resolve/3f2a698bc3cbad617970a73d623e0732bb5f87f5/examples/prompt-gallery/original/image_74.png) | ![Clover text-to-image output: a bouquet of blue flowers](https://huggingface.co/neonforestmist/Clover-Image-Tiny/resolve/3f2a698bc3cbad617970a73d623e0732bb5f87f5/examples/prompt-gallery/original/image_79.png) | ![Clover text-to-image output: a stained-glass starry night](https://huggingface.co/neonforestmist/Clover-Image-Tiny/resolve/3f2a698bc3cbad617970a73d623e0732bb5f87f5/examples/prompt-gallery/original/image_78.png) |
 | “a tiny glass greenhouse glowing in a moonlit garden” | “A bouquet of blue flowers” | “A stain glass window of a starry night” |
 
-## Change a detail with inpainting
+## Inpainting example
 
-Keep the image you started with and describe an edit to a selected area. Inpainting means
-painting a mask over the part you want to regenerate—white marks the edit, black marks what
-to keep. The published example below uses the prompt **“add blue sunglasses.”**
+Inpainting regenerates the white area of a mask. Black marks the area to preserve.
+This published before-and-after example uses the prompt **“add blue sunglasses.”**
 
 | Before | After the masked edit |
 |:---:|:---:|
@@ -41,20 +66,10 @@ Inpaint HQ pairs the full Stable Diffusion 1.5 inpainting denoiser with Clover's
 components. It is a larger, separate model focused on editing quality. For exact preservation,
 composite the result through the original binary mask.
 
-## Why create with Clover?
+## Styles
 
-- **Keep your ideas local.** Run generation on your own computer after downloading the weights.
-- **Start small.** The regular model has a 323.4M-parameter denoiser and generates at a native 512 × 512 resolution.
-- **Find your look.** Explore Monet, Pointillism, and Watercolor Anime with optional style adapters.
-- **Make it part of your workflow.** Use a visual demo, Python, a command-line runner, or the native Core ML app.
-
-Clover is a good fit for visual brainstorming, illustration experiments, and developers
-building local creative tools. You control the prompt, seed, style, and generation settings.
-
-## One prompt, different styles
-
-Style adapters—also called LoRAs—let you change the visual character of your images.
-Here is the same greenhouse prompt with the base model and three published Clover styles.
+Optional LoRA adapters change the model's visual style. Below is the same greenhouse
+prompt with the base model, Monet, Pointillism, and Watercolor Anime.
 
 | Clover | Monet | Pointillism | Watercolor Anime |
 |:---:|:---:|:---:|:---:|
@@ -114,7 +129,7 @@ Existing planned outputs are never overwritten.
 
 [**Full setup, controls, and offline instructions →**](docs/USAGE.md)
 
-## Choose your way to create
+## Interfaces
 
 | Your workflow | Start here |
 |---|---|
@@ -127,20 +142,20 @@ Existing planned outputs are never overwritten.
 The hosted demo runs remotely. Local Python and Core ML workflows run on your hardware
 after setup; model downloads require a network connection.
 
-## Small enough to build around
+## Model facts
 
 | Regular Clover model | What it means |
 |---|---|
-| **323.4M denoiser parameters** | A compact Stable Diffusion 1.4-class image model |
+| **323.4M denoiser parameters** | BK-SDM-Tiny architecture; denoiser count only |
 | **About 1.67 GB of model files** | Includes the text encoder, VAE, and packaged safety checker; allow extra space for dependencies and caches |
-| **512 × 512 native output** | A practical starting point for visual experiments |
+| **512 × 512 native output** | Native output resolution |
 | **Diffusers + separate Core ML exports** | Python integration and a path to on-device Apple apps |
 
 On one NVIDIA A10G benchmark, Clover averaged **1.024 seconds per image** across
 16 prompts at 512 × 512, 30 DDIM steps, and guidance 7.5. That is a specific measured
 GPU result, not an iPhone timing or a speed guarantee. [See the comparison and protocol](https://huggingface.co/neonforestmist/Clover-Image-Tiny/blob/main/benchmarks/text-to-image/results/clover-small-model-comparison-20260825/REPORT.md).
 
-## A few things to know
+## Usage notes
 
 **Can I use Clover offline?** Yes. Download the model and dependencies first, then use
 `--local-files-only` with the local runner. No hosted generation service is required.
